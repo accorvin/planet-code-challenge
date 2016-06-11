@@ -1,3 +1,6 @@
+# Test virtual environment
+acorvin_code_challenge
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
