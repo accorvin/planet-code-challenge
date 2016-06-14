@@ -7,6 +7,7 @@ import uuid
 TEST_HOST = 'localhost'
 TEST_PORT = 8000
 USERS_URL = '/users'
+GROUPS_URL = '/groups'
 
 
 def unique_id():
@@ -38,5 +39,13 @@ def create_user(user_data):
     post(TEST_HOST, TEST_PORT, USERS_URL, user_data)
 
 
+def create_group(group_data):
+    post(TEST_HOST, TEST_PORT, GROUPS_URL, group_data)
+
+
 def delete_user(user_id):
     get_or_delete('DELETE', TEST_HOST, TEST_PORT, USERS_URL, user_id)
+
+
+def delete_group(group_name):
+    get_or_delete('DELETE', TEST_HOST, TEST_PORT, GROUPS_URL, group_name)
