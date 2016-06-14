@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseBadRequest, \
 from django.views.decorators.csrf import csrf_exempt
 from usersapi.models.model_exception import ErrorType, ModelException
 from usersapi.models.user import create_user, delete_user, get_user, \
-    update_user, user_exists, User
+    update_user, user_exists
 
 
 @csrf_exempt
