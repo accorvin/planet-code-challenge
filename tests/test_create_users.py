@@ -78,5 +78,20 @@ class TestCreateUsers(unittest.TestCase):
         self.assertEqual(response.status, 400)
 
 
+    def test_create_user_existing_user(self):
+        user_id = unique_id()
+        self.created_user_ids.append(user_id)
+        user_data = {
+            'first_name': 'existing',
+            'last_name': 'user',
+            'userid': user_id,
+            'groups': ['group1', 'group2']
+        }
+        response = post(TEST_HOST, TEST_PORT, USERS_URL, user_data)
+        self.assertEqual(response.status, 200)
+        response = post(TEST_HOST, TEST_PORT, USERS_URL, user_data)
+        self.assertEqual(response.status, 400)
+
+
 if __name__ == '__main__':
     unittest.main()
