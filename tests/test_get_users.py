@@ -51,6 +51,11 @@ class TestGetUsers(unittest.TestCase):
         self.assertEqual(self.user_id, response_json['userid'])
         self.assertEqual(self.groups, response_json['groups'])
 
+    def test_get_user_no_userid(self):
+        response = get_or_delete('GET', TEST_HOST, TEST_PORT,
+                                  USERS_URL, '')
+        self.assertEqual(response.status, 405)
+
 
 if __name__ == '__main__':
     unittest.main()
