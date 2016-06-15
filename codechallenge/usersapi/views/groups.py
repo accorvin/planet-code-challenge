@@ -39,7 +39,7 @@ def groups_generic(request):
 
 
 @csrf_exempt
-def groups_specific(request, user_name):
+def groups_specific(request, group_name):
     try:
         allowed_methods = ['GET', 'PUT', 'DELETE']
         if request.method not in allowed_methods:

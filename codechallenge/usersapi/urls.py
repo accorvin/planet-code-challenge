@@ -11,6 +11,6 @@ urlpatterns = [
     url(r'^users/(?P<user_id>.*)/?$', users_specific,
         name='users_specific'),
     url(r'^groups/?$', groups_generic, name='groups_generic'),
-    url(r'^users/(?P<group_name>.*)/?$', groups_specific,
+    url(r'^groups/(?P<group_name>.*)/?$', groups_specific,
         name='groups_specific')
 ]

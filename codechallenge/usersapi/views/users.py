@@ -72,7 +72,7 @@ def users_specific(request, user_id):
                 msg = 'The supplied user data was invalid'
                 return HttpResponseBadRequest(msg)
             if user_exists(user_id):
-                update_user(request_data)
+                update_user(old_user_id, request_data)
             else:
                 msg = 'A user with the specified userid does not exist'
                 raise HttpResponseNotFound(msg)

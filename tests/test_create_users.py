@@ -1,6 +1,7 @@
 import unittest
 
-from test_helper import delete_user, post, unique_id
+from test_helper import create_group, delete_group, delete_user, post, \
+    unique_id
 
 
 TEST_HOST = 'localhost'
@@ -12,10 +13,14 @@ class TestCreateUsers(unittest.TestCase):
 
     def setUp(self):
         self.created_user_ids = []
+        create_group({'name': 'group1'})
+        create_group({'name': 'group2'})
 
     def tearDown(self):
         for user_id in self.created_user_ids:
             delete_user(user_id)
+        delete_group('group1')
+        delete_group('group2')
 
     def test_create_simple_user(self):
         user_id = unique_id()
@@ -91,6 +96,18 @@ class TestCreateUsers(unittest.TestCase):
         self.assertEqual(response.status, 200)
         response = post(TEST_HOST, TEST_PORT, USERS_URL, user_data)
         self.assertEqual(response.status, 400)
+
+    def test_create_user_nonexisting_group(self):
+        user_id = unique_id()
+        self.created_user_ids.append(user_id)
+        user_data = {
+            'first_name': 'simple',
+            'last_name': 'user',
+            'userid': user_id,
+            'groups': ['group32432']
+        }
+        response = post(TEST_HOST, TEST_PORT, USERS_URL, user_data)
+        self.assertEqual(response.status, 500)
 
 
 if __name__ == '__main__':

@@ -1,3 +1,5 @@
+import json
+
 from django.db import models
 
 
@@ -40,3 +42,9 @@ def update_group(group_json):
 
 class Group(models.Model):
     group_name = models.CharField(max_length=200, primary_key=True)
+
+    def get_output(self):
+        from .group_member import get_group_members
+        users_in_group = get_group_members(self)
+        output = {'userids': users_in_group}
+        return json.dumps(output, indent=4)
