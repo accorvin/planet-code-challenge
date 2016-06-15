@@ -8,6 +8,7 @@ from usersapi.models.model_exception import ErrorType, ModelException
 from usersapi.models.group import create_group, delete_group, get_group, \
     update_group, group_exists
 
+
 @csrf_exempt
 def groups_generic(request):
     try:

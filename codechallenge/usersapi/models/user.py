@@ -88,7 +88,7 @@ def create_user(user_json):
 
     try:
         user = User(first_name=first_name, last_name=last_name,
-                user_id=user_id)
+                    user_id=user_id)
         user.save()
         user.set_groups(user_groups)
     except Exception as e:

@@ -80,4 +80,3 @@ class Group(models.Model):
             user = get_user(user_id)
             group_member = GroupMember(group=self, user=user)
             group_member.save()
-
