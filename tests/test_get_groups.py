@@ -63,6 +63,11 @@ class TestGetGroups(unittest.TestCase):
         self.assertTrue('userids' in response_json)
         self.assertEqual(response_json['userids'], [user_id])
 
+    def test_get_group_no_name(self):
+        response = get_or_delete('GET', TEST_HOST, TEST_PORT,
+                                  GROUPS_URL, '')
+        self.assertEqual(response.status, 405)
+
 
 if __name__ == '__main__':
     unittest.main()
