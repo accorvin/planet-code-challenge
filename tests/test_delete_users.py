@@ -38,21 +38,20 @@ class TestDeleteUsers(unittest.TestCase):
         self.assertEqual(response.status, 200)
 
         response = get_or_delete('DELETE', TEST_HOST, TEST_PORT,
-                                  USERS_URL, self.user_id)
+                                 USERS_URL, self.user_id)
         self.assertEqual(response.status, 200)
 
         response = get_user(self.user_id)
         self.assertEqual(response.status, 404)
 
-
     def test_delete_missing_user(self):
         response = get_or_delete('DELETE', TEST_HOST, TEST_PORT,
-                                  USERS_URL, 'foobar')
+                                 USERS_URL, 'foobar')
         self.assertEqual(response.status, 404)
 
     def test_delete_user_no_userid(self):
         response = get_or_delete('DELETE', TEST_HOST, TEST_PORT,
-                                  USERS_URL, '')
+                                 USERS_URL, '')
         self.assertEqual(response.status, 405)
 
 

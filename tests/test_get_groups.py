@@ -29,7 +29,7 @@ class TestGetGroups(unittest.TestCase):
 
     def test_get_created_group(self):
         response = get_or_delete('GET', TEST_HOST, TEST_PORT,
-                                  GROUPS_URL, self.group_name)
+                                 GROUPS_URL, self.group_name)
         response_string = response.read().decode()
         response_json = json.loads(response_string)
 
@@ -55,7 +55,7 @@ class TestGetGroups(unittest.TestCase):
         create_user(user_data)
 
         response = get_or_delete('GET', TEST_HOST, TEST_PORT,
-                                  GROUPS_URL, self.group_name)
+                                 GROUPS_URL, self.group_name)
         response_string = response.read().decode()
         response_json = json.loads(response_string)
 
@@ -65,7 +65,7 @@ class TestGetGroups(unittest.TestCase):
 
     def test_get_group_no_name(self):
         response = get_or_delete('GET', TEST_HOST, TEST_PORT,
-                                  GROUPS_URL, '')
+                                 GROUPS_URL, '')
         self.assertEqual(response.status, 405)
 
 

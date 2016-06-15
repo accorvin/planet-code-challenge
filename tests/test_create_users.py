@@ -34,7 +34,6 @@ class TestCreateUsers(unittest.TestCase):
         response = post(TEST_HOST, TEST_PORT, USERS_URL, user_data)
         self.assertEqual(response.status, 200)
 
-
     def test_create_user_missing_fname(self):
         user_id = unique_id()
         self.created_user_ids.append(user_id)
@@ -45,7 +44,6 @@ class TestCreateUsers(unittest.TestCase):
         }
         response = post(TEST_HOST, TEST_PORT, USERS_URL, user_data)
         self.assertEqual(response.status, 400)
-
 
     def test_create_user_missing_lname(self):
         user_id = unique_id()
@@ -58,7 +56,6 @@ class TestCreateUsers(unittest.TestCase):
         response = post(TEST_HOST, TEST_PORT, USERS_URL, user_data)
         self.assertEqual(response.status, 400)
 
-
     def test_create_user_missing_uid(self):
         user_id = unique_id()
         self.created_user_ids.append(user_id)
@@ -70,7 +67,6 @@ class TestCreateUsers(unittest.TestCase):
         response = post(TEST_HOST, TEST_PORT, USERS_URL, user_data)
         self.assertEqual(response.status, 400)
 
-
     def test_create_user_missing_groups(self):
         user_id = unique_id()
         self.created_user_ids.append(user_id)
@@ -81,7 +77,6 @@ class TestCreateUsers(unittest.TestCase):
         }
         response = post(TEST_HOST, TEST_PORT, USERS_URL, user_data)
         self.assertEqual(response.status, 400)
-
 
     def test_create_user_existing_user(self):
         user_id = unique_id()

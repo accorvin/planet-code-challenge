@@ -60,7 +60,6 @@ class TestUpdateGroups(unittest.TestCase):
         self.assertTrue(self.user_2_name in users)
         self.assertTrue(self.user_1_name not in users)
 
-
     def test_update_group_missing_members(self):
         response = put(TEST_HOST, TEST_PORT,
                        GROUPS_URL, self.group_name, {})

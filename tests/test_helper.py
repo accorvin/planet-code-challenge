@@ -49,6 +49,7 @@ def get_or_delete(method, host, port, url, identifier):
 def get_user(user_id):
     return get_or_delete('GET', TEST_HOST, TEST_PORT, USERS_URL, user_id)
 
+
 def get_group(group_name):
     return get_or_delete('GET', TEST_HOST, TEST_PORT, GROUPS_URL, group_name)
 

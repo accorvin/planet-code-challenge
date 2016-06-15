@@ -26,7 +26,6 @@ class TestCreateGroups(unittest.TestCase):
         response = post(TEST_HOST, TEST_PORT, GROUPS_URL, group_data)
         self.assertEqual(response.status, 200)
 
-
     def test_create_group_missing_name(self):
         group_name = unique_id()
         self.created_group_names.append(group_name)
@@ -34,7 +33,6 @@ class TestCreateGroups(unittest.TestCase):
         }
         response = post(TEST_HOST, TEST_PORT, GROUPS_URL, group_data)
         self.assertEqual(response.status, 400)
-
 
     def test_create_group_existing_group(self):
         group_name = unique_id()
@@ -46,7 +44,6 @@ class TestCreateGroups(unittest.TestCase):
         self.assertEqual(response.status, 200)
         response = post(TEST_HOST, TEST_PORT, GROUPS_URL, group_data)
         self.assertEqual(response.status, 400)
-
 
 
 if __name__ == '__main__':

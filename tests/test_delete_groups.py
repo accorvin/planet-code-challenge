@@ -25,21 +25,20 @@ class TestDeleteGroups(unittest.TestCase):
         self.assertEqual(response.status, 200)
 
         response = get_or_delete('DELETE', TEST_HOST, TEST_PORT,
-                                  GROUPS_URL, self.group_name)
+                                 GROUPS_URL, self.group_name)
         self.assertEqual(response.status, 200)
 
         response = get_group(self.group_name)
         self.assertEqual(response.status, 404)
 
-
     def test_delete_missing_group(self):
         response = get_or_delete('DELETE', TEST_HOST, TEST_PORT,
-                                  GROUPS_URL, 'foobar')
+                                 GROUPS_URL, 'foobar')
         self.assertEqual(response.status, 404)
 
     def test_delete_group_no_name(self):
         response = get_or_delete('DELETE', TEST_HOST, TEST_PORT,
-                                  GROUPS_URL, '')
+                                 GROUPS_URL, '')
         self.assertEqual(response.status, 405)
 
 

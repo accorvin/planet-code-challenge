@@ -36,7 +36,7 @@ class TestGetUsers(unittest.TestCase):
 
     def test_get_created_user(self):
         response = get_or_delete('GET', TEST_HOST, TEST_PORT,
-                                  USERS_URL, self.user_id)
+                                 USERS_URL, self.user_id)
         response_string = response.read().decode()
         response_json = json.loads(response_string)
 
@@ -53,7 +53,7 @@ class TestGetUsers(unittest.TestCase):
 
     def test_get_user_no_userid(self):
         response = get_or_delete('GET', TEST_HOST, TEST_PORT,
-                                  USERS_URL, '')
+                                 USERS_URL, '')
         self.assertEqual(response.status, 405)
 
 
