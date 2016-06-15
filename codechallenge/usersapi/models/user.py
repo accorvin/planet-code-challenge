@@ -66,6 +66,7 @@ def user_exists(user_id):
 
 
 def delete_user(user_id):
+    from .group_member import delete_user_groups, GroupMember
     if not user_exists(user_id):
         msg = 'A user with the ID {0} does not exist'.format(user_id)
         raise ModelException(ErrorType.not_found, msg)
