@@ -1,6 +1,7 @@
 import json
 
 from django.db import models
+from .model_exception import ErrorType, ModelException
 
 
 def get_group(group_name):
@@ -21,7 +22,7 @@ def delete_group(group_name):
         msg = 'A group with the name {0} does not exist'.format(group_name)
         raise ModelException(ErrorType.not_found, msg)
     else:
-        group = get_group(user_id)
+        group = get_group(group_name)
         group.delete()
 
 
