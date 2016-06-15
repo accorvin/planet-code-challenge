@@ -9,7 +9,7 @@ TEST_PORT = 8000
 USERS_URL = '/users'
 
 
-class TestCreateUsers(unittest.TestCase):
+class TestDeleteUsers(unittest.TestCase):
 
     def setUp(self):
         self.first_name = 'first_name'
