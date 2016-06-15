@@ -72,12 +72,19 @@ def users_specific(request, user_id):
                 msg = 'The supplied user data was invalid'
                 return HttpResponseBadRequest(msg)
             if user_exists(user_id):
-                update_user(old_user_id, request_data)
+                try:
+                    update_user(user_id, request_data)
+                    return HttpResponse('The user was successfully updated')
+                except ModelException as e:
+                    if e.error_type is ErrorType.user:
+                        return HttpResponseBadRequest(e.error_message)
+                    else:
+                        raise
             else:
                 msg = 'A user with the specified userid does not exist'
-                raise HttpResponseNotFound(msg)
+                return HttpResponseNotFound(msg)
         else:
             msg = 'The requested method is not allowed at this URl'
             return HttpResponseBadRequest(msg)
     except Exception as e:
-        return HttpResponseServerError(e)
+        return HttpResponseServerError(str(e))

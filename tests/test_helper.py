@@ -24,6 +24,17 @@ def post(host, port, url, body_data):
     return response
 
 
+def put(host, port, url, identifier, body_data):
+    full_url = '{0}/{1}'.format(url, identifier)
+    headers = {'Content-type': 'application/x-www-form-urlencoded',
+               'Accept': 'text/plain'}
+    conn = http.client.HTTPConnection(host, port)
+    conn.request('PUT', full_url, json.dumps(body_data), headers)
+    response = conn.getresponse()
+
+    return response
+
+
 def get_or_delete(method, host, port, url, identifier):
     full_url = '{0}/{1}'.format(url, identifier)
     headers = {'Content-type': 'application/x-www-form-urlencoded',

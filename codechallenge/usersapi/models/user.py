@@ -2,7 +2,6 @@ import json
 
 from django.db import models
 from .model_exception import ErrorType, ModelException
-from .group import get_group, group_exists
 
 
 class User(models.Model):
@@ -29,6 +28,7 @@ class User(models.Model):
 
     def set_groups(self, groups_list):
         from .group_member import delete_user_groups, GroupMember
+        from .group import get_group, group_exists
         if not isinstance(groups_list, list):
             msg = 'The group data is not a valid list.'
             raise ModelException(ErrorType.user, msg)
@@ -118,7 +118,9 @@ def update_user(old_user_id, user_json):
             user.set_groups(user_groups)
         else:
             msg = 'A user with the specified userid does not exist'
-            raise HttpResponseNotFound(msg)
+            raise ModelException(ErrorType.user, msg)
+    except ModelException:
+        raise
     except Exception as e:
         msg = 'A server error occured. The user was not updated: {0}'
         raise ModelException(ErrorType.server, msg.format(e))

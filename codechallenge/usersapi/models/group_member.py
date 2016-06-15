@@ -13,11 +13,11 @@ def get_user_group_members(user):
 
 def get_group_members(group):
     try:
-        user_ids = []
+        members = []
         group_members = GroupMember.objects.filter(group=group)
         for member in group_members:
-            user_ids.append(member.user.user_id)
-        return user_ids
+            members.append(member)
+        return members
     except GroupMember.DoesNotExist:
         return []
 
@@ -26,6 +26,12 @@ def delete_user_groups(user):
     user_group_members = get_user_group_members(user)
     for group_member in user_group_members:
         group_member.delete()
+
+
+def delete_group_users(group):
+    group_members = get_group_members(group)
+    for member in group_members:
+        member.delete()
 
 
 class GroupMember(models.Model):
