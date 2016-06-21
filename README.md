@@ -1,11 +1,9 @@
-# planet-code-challenge
-
 # Running the API
 
 To run the API, simply execute the run.sh script at the root of this
 repository by executing:
 
-``bash
+```bash
 ./run.sh
 ```
 
