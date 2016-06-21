@@ -9,6 +9,8 @@ from usersapi.models.group import create_group, delete_group, get_group, \
     update_group, group_exists
 
 
+# Generic group view. This gets executed when no group id is specified
+# in the request URL (when creating a group)
 @csrf_exempt
 def groups_generic(request):
     try:
@@ -39,6 +41,8 @@ def groups_generic(request):
         return HttpResponseServerError(str(e))
 
 
+# Specific group view. This gets executed when a group id is specified
+# in the request URL.
 @csrf_exempt
 def groups_specific(request, group_name):
     if group_name is None or group_name == '':
