@@ -22,8 +22,12 @@ def users_generic(request):
             try:
                 # Get the user data from the request body. Return an error if
                 # the data is malformed or missing a required key.
-                request_body = request.body.decode('utf-8')
-                request_data = json.loads(request_body)
+                try:
+                    request_body = request.body.decode('utf-8')
+                    request_data = json.loads(request_body)
+                except Exception as e:
+                    msg = 'The request body could not be parsed: {0}'
+                    return HttpResponseBadRequest(msg.format(e))
                 if 'userid' not in request_data:
                     msg = 'You must specify a userid'
                     return HttpResponseBadRequest(msg)
