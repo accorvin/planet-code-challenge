@@ -53,13 +53,17 @@ def users_generic(request):
         return HttpResponseServerError(str(e))
 
 
+# Specific user view. This view gets exercised when a userid is
+# specified in the request URL.
 @csrf_exempt
 def users_specific(request, user_id):
     try:
+        # Check that the request method is allowed
         allowed_methods = ['GET', 'PUT', 'DELETE']
         if request.method not in allowed_methods:
             return HttpResponseNotAllowed(allowed_methods)
         elif request.method == 'GET':
+            # If getting a user, check that the user exists
             if not user_exists(user_id):
                 msg = 'A user with the specified userid does not exist'
                 return HttpResponseNotFound(msg)
@@ -68,15 +72,18 @@ def users_specific(request, user_id):
                 return HttpResponse(user.get_output())
         elif request.method == 'DELETE':
             try:
+                # Try to delete the user
                 delete_user(user_id)
                 return HttpResponse('User successfully deleted')
             except ModelException as e:
+                # Return a 404 if the user doesn't exist
                 if e.error_type is ErrorType.not_found:
                     msg = 'A user with the specified userid does not exist'
                     return HttpResponseNotFound(msg)
                 else:
                     raise
         elif request.method == 'PUT':
+            # First check that the specified user data is valid json
             try:
                 request_body = request.body.decode('utf-8')
                 request_data = json.loads(request_body)
@@ -85,6 +92,7 @@ def users_specific(request, user_id):
                 return HttpResponseBadRequest(msg)
             if user_exists(user_id):
                 try:
+                    # Update the user
                     update_user(user_id, request_data)
                     return HttpResponse('The user was successfully updated')
                 except ModelException as e:
@@ -93,6 +101,7 @@ def users_specific(request, user_id):
                     else:
                         raise
             else:
+                # Return a 404 if the specified user doesn't exist
                 msg = 'A user with the specified userid does not exist'
                 return HttpResponseNotFound(msg)
         else:
