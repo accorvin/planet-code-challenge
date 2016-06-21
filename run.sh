@@ -6,6 +6,7 @@ VIRTUALENV_CMD="pyvenv"
 VIRTUALENV_NAME="acorvin_code_challenge"
 REQUIREMENTS_FILE="python-requirements.txt"
 PIP_CMD="pip3"
+CODECHALLENGE_DIR="codechallenge"
 
 # To ensure program isolation, this script runs the API and installs all
 # necessary dependencies within a python virtual environment.
@@ -25,3 +26,7 @@ source ./$VIRTUALENV_NAME/bin/activate
 
 # Now install python requirements into the virtual environment
 $PIP_CMD install -r $REQUIREMENTS_FILE
+
+pushd $CODECHALLENGE_DIR
+python3 manage.py runserver
+popd
