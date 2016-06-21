@@ -28,5 +28,6 @@ source ./$VIRTUALENV_NAME/bin/activate
 $PIP_CMD install -r $REQUIREMENTS_FILE
 
 pushd $CODECHALLENGE_DIR
+python3 manage.py migrate
 python3 manage.py runserver
 popd
