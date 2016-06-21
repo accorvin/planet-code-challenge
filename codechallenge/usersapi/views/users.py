@@ -8,14 +8,20 @@ from usersapi.models.user import create_user, delete_user, get_user, \
     update_user, user_exists
 
 
+# Generic users view. This view is hit when no userid is specified in the URL.
+# This view should only be hit for a POST request when creating a user.
 @csrf_exempt
 def users_generic(request):
     try:
+        # First check that the request is a POST request. If any other HTTP
+        # method was used, return an error.
         allowed_methods = ['POST']
         if request.method not in allowed_methods:
             return HttpResponseNotAllowed(allowed_methods)
         else:
             try:
+                # Get the user data from the request body. Return an error if
+                # the data is malformed or missing a required key.
                 request_body = request.body.decode('utf-8')
                 request_data = json.loads(request_body)
                 if 'userid' not in request_data:
@@ -26,10 +32,12 @@ def users_generic(request):
                     return HttpResponseBadRequest(msg)
                 user_id = request_data['userid']
 
+                # Return an error if the specified userid already exists
                 if user_exists(user_id):
                     msg = 'A user with the specified userid already exists'
                     return HttpResponseBadRequest(msg)
                 else:
+                    # Create the user
                     create_user(request_data)
                     return HttpResponse('User successfully created')
             except ModelException as e:
